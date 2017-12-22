@@ -1,13 +1,13 @@
 
 public class Oxygene {
 
-	public static  int [] oxygene(int niveau, int action, int oxygene, int nbrcoffre, int coffre_dernier_niveau) {
+	public static  double [] oxygene(int niveau, int action, double oxygene, int nbrcoffre, int coffre_dernier_niveau) {
 		
-		int[] values = new int [2];
+		double[] values = new double [2];
 		
-		if(niveau != 0) {
+		if(niveau != 1) {
 		
-			oxygene = oxygene - Cout.cout(action, nbrcoffre, niveau);
+			oxygene = oxygene + Cout.cout(action, nbrcoffre, niveau);
 		
 			if(oxygene == 0) {
 			

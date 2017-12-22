@@ -22,35 +22,45 @@ public class Main {
 			
 			cave = Niveau.niveau(a, cave);
 			a = true;
-			
+				
+			int coffre[] = new int[cave[3]];
+			int n=0;
+			while(n!=cave[3]) {coffre[n]=1;n++;}
+		
 			while(oxygene <= 35) {
-			InterfaceGraphique.IG(oxygene, cave, pos);
+			InterfaceGraphique.IG(oxygene, cave, pos, coffre);
 			StdDraw.show(50);
-			
 			//System.out.println(oxygene);
 			
 			double fact = 35.0/(double)(2*cave[3]);
 			
 			if(StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && pos != -cave[3]) {
 				pos--;
-				oxygene = oxygene + fact*Cout.cout(1, 0, pos);
-				InterfaceGraphique.IG(oxygene, cave, pos);
+				oxygene = Oxygene.oxygene(pos, 1, oxygene, 0, 0)[0];
+				
 		}
 			if(StdDraw.isKeyPressed(KeyEvent.VK_UP) && pos !=0) {
 				pos++;
-				oxygene = oxygene + fact*Cout.cout(2, 0, pos);
-				InterfaceGraphique.IG(oxygene, cave, pos);
+				oxygene = Oxygene.oxygene(pos, 2, oxygene, 0, 0)[0];
+				//oxygene = oxygene + fact*Cout.cout(2, 0, pos);
+				
 		}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER)) {
-				oxygene = oxygene + fact*Cout.cout(3, 0, pos);
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && coffre[cave[3] + pos] !=0) {
+				oxygene = Oxygene.oxygene(pos, 3, oxygene, 0, 0)[0];
+				coffre[cave[3] + pos] = coffre[cave[3] + pos] - 1;
+				System.out.println(coffre[cave[3] + pos]);
+				//oxygene = oxygene + fact*Cout.cout(3, 0, pos);
+				
 			}
+				
 			}
-			while(true){
+			while(!(StdDraw.isKeyPressed(KeyEvent.VK_RIGHT))){
 			StdDraw.clear(StdDraw.RED);
 			StdDraw.text(75, 50, "Vous êtes morts");
-			StdDraw.show(5000);
-		
+			StdDraw.show();
 			}
+			}
+			
 		}
 			}
 		//InterfaceGraphique.IG();
@@ -62,7 +72,7 @@ public class Main {
 		 
 	System.out.println(Coffre.coffre(1,6,6));
 */
-	}
+
 	
 	
 
