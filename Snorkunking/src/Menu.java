@@ -10,18 +10,21 @@ public static boolean menu() {
 		final int Y_MAX=100;
 		final float WIDTH=0.5f;
 		
+		//StdDraw.setCanvasSize(750, 750);
 		StdDraw.setXscale(-WIDTH, X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH, Y_MAX+WIDTH);
 		
-		StdDraw.picture(117, 50, "/mnt/monster/home/eleves/v/vala10893/Téléchargements/Snorkunknig.jpg", 250, 125);
+		StdDraw.picture(117, 50, "Snorkunknig.jpg", 250, 125);
 		//System.out.println(KeyEvent.KEY_PRESSED );
 		
-		if(StdDraw.isMousePressed() == true ) {
-			
-			StdDraw.setPenColor(StdDraw.BLACK);
-			StdDraw.text(75, 50, "bonjour");
-			System.out.println(2);
+		double Y = StdDraw.mouseY();
+		double X = StdDraw.mouseX();
+		
+		if(StdDraw.isMousePressed() == true && (X>=3 && X<=53) && (Y>=1 && Y<=5) ) {
+			//oxygene++;
+				//System.out.println(oxygene);*/	
+			return true;
 		}
-		return true;
+		else {return false;}
 	}
 }

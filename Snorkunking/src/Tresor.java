@@ -2,8 +2,9 @@ import java.util.Random;
 
 public class Tresor {
 	
-	public static int tresor (int cave) {
+	public static int[] tresor (int cave, int maxNiveau) {
 		
+		int [] tresors = new int [maxNiveau];
 		int a = 0;
 		int b = 0;
 		
@@ -22,9 +23,14 @@ public class Tresor {
 			 b = 10;
 		}
 		
+		for(int i=1; i==maxNiveau; i++) {
+			
 		Random rand = new Random();
 		int tresor = rand.nextInt(a) + b;
-		return tresor;
+		tresors[i] = tresor;
+		}
+		
+		return tresors;
 		
 		
 		
