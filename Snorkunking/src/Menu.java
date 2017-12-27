@@ -10,7 +10,6 @@ public static boolean menu() {
 		final int Y_MAX=100;
 		final float WIDTH=0.5f;
 		
-		//StdDraw.setCanvasSize(750, 750);
 		StdDraw.setXscale(-WIDTH, X_MAX+WIDTH);
 		StdDraw.setYscale(-WIDTH, Y_MAX+WIDTH);
 		

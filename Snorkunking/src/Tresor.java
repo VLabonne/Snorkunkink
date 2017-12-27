@@ -1,40 +1,35 @@
 import java.util.Random;
 
 public class Tresor {
-	
-	public static int[] tresor (int cave, int maxNiveau) {
+
+	public static int[] tresor (int [] cave) {
 		
-		int [] tresors = new int [maxNiveau];
+		int [] tresors = new int [cave[3]];
 		int a = 0;
 		int b = 0;
+		int n =0;
 		
-		if (cave == 1) {
+		while(n != cave[3]) {
+			if (n <= cave[0]) {
 			 a = 3;
 			 b = 1;
-		}
-		
-		if (cave == 2) {
+			}
+			if(cave[0] < n && n <= cave[0] + cave[1]){
 			 a = 4;
 			 b = 5;
-		}
-		
-		if (cave == 3) {
+			}
+			if(cave[0] + cave[1] < n && n != cave[3]) {
 			 a = 3;
 			 b = 10;
-		}
-		
-		for(int i=1; i==maxNiveau; i++) {
-			
+			}
+		//for( i=0; i == cave[3]; i++) {
 		Random rand = new Random();
 		int tresor = rand.nextInt(a) + b;
-		tresors[i] = tresor;
+		tresors[n] = tresor;
+		n++;
 		}
-		
-		return tresors;
-		
-		
-		
+	return tresors;
 
-	}
+}
 
 }

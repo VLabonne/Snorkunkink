@@ -3,13 +3,12 @@ import edu.princeton.cs.introcs.StdDraw;
 public class InterfaceGraphique {
 	
 
-	public static boolean IG(double oxygene, int[] cave, int pos, int[]coffre) {
+	public static boolean IG(double oxygene, int[] cave, int pos, int[]coffre, int[] tresorSvg, int[] playerTresor) {
 		
 		final int X_MAX=150;
 		final int Y_MAX=100;
 		final float WIDTH=0.5f;
 			
-			int coffre_svg = 0;
 			
 			//cave = Niveau.niveau(a, cave);
 			
@@ -17,7 +16,6 @@ public class InterfaceGraphique {
 			System.out.println(cave[1]);
 			System.out.println(cave[2]);*///Debug 
 			
-			//StdDraw.setCanvasSize(750, 750);
 			StdDraw.setXscale(0, X_MAX+WIDTH);
 			StdDraw.setYscale(0, Y_MAX+WIDTH);
 			
@@ -33,19 +31,22 @@ public class InterfaceGraphique {
 					//StdDraw.filledRectangle(X_MAX, Y_MAX, X_MAX + 1, 15);
 					
 					StdDraw.setPenColor(StdDraw.DARK_GRAY);
-					StdDraw.filledRectangle(80, 90, 36, 3);
+					StdDraw.filledRectangle(70, 90, 36, 3);
 					
+					//StdDraw.setPenColor(StdDraw.BOOK_RED); - test couleur
 					StdDraw.setPenColor(StdDraw.WHITE);
 					StdDraw.textLeft(5, 97.5, "Score");
 					StdDraw.textLeft(5, 90, "Oxygene :");
+					StdDraw.textRight(145, 90, "Score virtuel ( " + playerTresor[0] + " )");
 					
 					for(int i=1; i!=5;i++) {
 						
-						StdDraw.textLeft(30*i, 97.5, "joueur " + i + " : " + coffre_svg);
+						StdDraw.textLeft(30.5*i, 97.5, "joueur " + i + " : " + tresorSvg[i - 1] );
+						
 					}
 				
 					StdDraw.setPenColor(StdDraw.CYAN);
-					StdDraw.filledRectangle(80, 90, 35 - oxygene, 2);
+					StdDraw.filledRectangle(70, 90, 35 - oxygene, 2);
 					
 					StdDraw.setPenColor(StdDraw.WHITE);
 					//StdDraw.line(0, 85-1, X_MAX, 85-1);
