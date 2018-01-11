@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import edu.princeton.cs.introcs.StdDraw;
@@ -22,7 +23,7 @@ public class Main {
 			double oxygene = 0;
 			boolean a = false;
 			int [] cave = new int [4];
-			int pos = 0;
+			int[] pos = new int [4];
 			
 			cave = Niveau.niveau(a, cave);
 			a = true;
@@ -35,48 +36,60 @@ public class Main {
 			int []tresorSvg = new int[4];
 			int n=0;
 			
+			
 			while(n!=cave[3]) {coffre[n]=1;n++;}
 		
+			for(int player = 0; player!=4;) {	
 			while(oxygene <= 35) {
-			InterfaceGraphique.IG(oxygene, cave, pos, coffre, tresorSvg, playerTresor);
+			InterfaceGraphique.IG(player,  oxygene, cave, pos, coffre, tresorSvg, playerTresor);
 			StdDraw.show(50);
 			//System.out.println(oxygene);
 			
 			double fact = 35.0/(double)(2*cave[3]);
-			
-			if(StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && pos != -cave[3]) {
-				pos--;
-				oxygene = Oxygene.oxygene(pos, 1, oxygene, playerCoffre[0], playerTresor[0], tresorSvg[0])[0];
-				tresorSvg[0] =tresorSvg[0] + (int) Oxygene.oxygene(pos, 1, oxygene, playerCoffre[0], playerTresor[0], tresorSvg[0])[1];
-		}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_UP) && pos !=0) {
-				pos++;
-				oxygene = Oxygene.oxygene(pos, 2, oxygene, playerCoffre[0], playerTresor[0], tresorSvg[0])[0];
-				tresorSvg[0] = tresorSvg[0] + (int) Oxygene.oxygene(pos, 2, oxygene, playerCoffre[0], playerTresor[0], tresorSvg[0])[1];
+			if(pos[player] == 0) {playerCoffre[player] = 0;}
+			if(StdDraw.isKeyPressed(KeyEvent.VK_DOWN) && pos[player] != -cave[3]) {
+				pos[player]--;
+				oxygene = Oxygene.oxygene(pos[player], 1, oxygene, playerCoffre[player], playerTresor[player], tresorSvg[player])[0];
+				tresorSvg[player] =tresorSvg[player] + (int) Oxygene.oxygene(pos[player], 1, oxygene, playerCoffre[player], playerTresor[player], tresorSvg[player])[1];
+				if(player != 3) {player++;}
+				else {player = 0;}
+			}
+			if(StdDraw.isKeyPressed(KeyEvent.VK_UP) && pos[player] !=0) {
+				pos[player]++;
+				oxygene = Oxygene.oxygene(pos[player], 2, oxygene, playerCoffre[player], playerTresor[player], tresorSvg[player])[0];
+				tresorSvg[player] = tresorSvg[player] + (int) Oxygene.oxygene(pos[player], 2, oxygene, playerCoffre[player], playerTresor[player], tresorSvg[player])[1];
+				if(player != 3) {player++;}
+				else {player = 0;}
 				//oxygene = oxygene + fact*Cout.cout(2, 0, pos);
 				
 		}
-			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && pos != 0 && coffre[cave[3] + pos] != 0) {
-				oxygene = Oxygene.oxygene(pos, 3, oxygene, playerCoffre[0], playerTresor[0], tresorSvg[0])[0];
-				tresorSvg[0] = tresorSvg[0] + (int) Oxygene.oxygene(pos, 3, oxygene, playerCoffre[0], playerTresor[0], tresorSvg[0])[1];
-				coffre[cave[3] + pos] = coffre[cave[3] + pos] - 1;
-				playerCoffre[0] = +playerCoffre[0];
-				playerTresor[0] = playerTresor[0] + tresors[cave[3] + pos];
-				System.out.println(playerTresor[0]);
-				System.out.println(tresorSvg[0]);
+			if(StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && pos[player] != 0 && coffre[cave[3] + pos[player]] != 0) {
+				oxygene = Oxygene.oxygene(pos[player], 3, oxygene, playerCoffre[player], playerTresor[player], tresorSvg[player])[0];
+				tresorSvg[player] = tresorSvg[player] + (int) Oxygene.oxygene(pos[player], 3, oxygene, playerCoffre[player], playerTresor[player], tresorSvg[player])[1];
+				coffre[cave[3] + pos[player]] = coffre[cave[3] + pos[player]] - 1;
+				playerCoffre[player]++;
+				playerTresor[player] = playerTresor[player] + tresors[cave[3] + pos[player]];
+				//System.out.println(playerTresor[0]);
+				//System.out.println(tresorSvg[0]);
+				if(player != 3) {player++;}
+				else {player = 0;}
 				//oxygene = oxygene + fact*Cout.cout(3, 0, pos);
 				
 			}
+			System.out.println(oxygene);
 			}
 			while(!(StdDraw.isKeyPressed(KeyEvent.VK_RIGHT))){
-			StdDraw.clear(StdDraw.RED);
-			StdDraw.text(75, 50, "Vous êtes morts");
-			StdDraw.show();
-			}
-			}
 			
-		}
+				   deathscreen.deathscreens();
+	            }
+				
+				/*StdDraw.clear(StdDraw.RED);
+			StdDraw.text(75, 50, "Vous êtes morts");
+			StdDraw.show();*/
 			}
+			}
+	}
+		}
 		//InterfaceGraphique.IG();
 		
 				

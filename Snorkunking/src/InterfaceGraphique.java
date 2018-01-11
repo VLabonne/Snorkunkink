@@ -3,7 +3,7 @@ import edu.princeton.cs.introcs.StdDraw;
 public class InterfaceGraphique {
 	
 
-	public static boolean IG(double oxygene, int[] cave, int pos, int[]coffre, int[] tresorSvg, int[] playerTresor) {
+	public static boolean IG(int player, double oxygene, int[] cave, int[] pos, int[]coffre, int[] tresorSvg, int[] playerTresor) {
 		
 		final int X_MAX=150;
 		final int Y_MAX=100;
@@ -24,7 +24,10 @@ public class InterfaceGraphique {
 			int factor = Math.round((Y_MAX - 15)/ cave[3]);
 			
 			StdDraw.picture(75, 50, "Background.jpg", 250, 125);
-			StdDraw.picture(75,factor/2 + 1 + factor*cave[2] + factor*cave[1] + factor*cave[0] + pos*factor, "Sous-Marin.png", 3*factor, factor);
+			StdDraw.picture(45,factor/2 + 1 + factor*cave[2] + factor*cave[1] + factor*cave[0] + pos[0]*factor, "Sous-Marin.png", 3*factor, factor);
+			StdDraw.picture(75,factor/2 + 1 + factor*cave[2] + factor*cave[1] + factor*cave[0] + pos[1]*factor, "Sous-Marin2.png", 3*factor, factor);
+			StdDraw.picture(105,factor/2 + 1 + factor*cave[2] + factor*cave[1] + factor*cave[0] + pos[2]*factor, "Sous-Marin3.png", 3*factor, factor);
+			StdDraw.picture(135,factor/2 + 1 + factor*cave[2] + factor*cave[1] + factor*cave[0] + pos[3]*factor, "Sous-Marin4.png", 3*factor, factor);
 			coffre = Coffre.coffre(cave, factor, coffre);		
 			
 					//StdDraw.setPenColor(StdDraw.WHITE);
@@ -37,7 +40,7 @@ public class InterfaceGraphique {
 					StdDraw.setPenColor(StdDraw.WHITE);
 					StdDraw.textLeft(5, 97.5, "Score");
 					StdDraw.textLeft(5, 90, "Oxygene :");
-					StdDraw.textRight(145, 90, "Score virtuel ( " + playerTresor[0] + " )");
+					StdDraw.textRight(145, 90, "Score virtuel ( " + playerTresor[player] + " )");
 					
 					for(int i=1; i!=5;i++) {
 						
