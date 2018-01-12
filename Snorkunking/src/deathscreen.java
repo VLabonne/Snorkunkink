@@ -10,7 +10,7 @@ public class deathscreen {
          Font font = new Font("Arial", Font.BOLD, 50);
          StdDraw.setFont(font);
          StdDraw.setPenColor(StdDraw.BOOK_RED);
-         StdDraw.text(75, 50, "Vous êtes morts");
+         StdDraw.text(75, 50, "Vous Ãªtes morts");
          StdDraw.show();
          StdDraw.setFont();
          
