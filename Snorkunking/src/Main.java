@@ -37,6 +37,10 @@ public class Main {
 			boolean detectionToucheBas = false;
 			boolean detectionToucheHaut = false;
 			boolean detectionToucheRecup = false;
+			boolean ft = false;
+			int[] data = new int[3];
+			data[0] = 5;
+			int targets = 0;
 			
 			while (n != cave[3]) {
 				coffre[n] = 1;
@@ -47,6 +51,7 @@ public class Main {
 			while (oxygene <= 35) {
 				InterfaceGraphique.IG(player, oxygene, cave, pos, coffre, tresorSvg, playerTresor);
 				StdDraw.show(50);
+				//int players = player;
 				// System.out.println(oxygene);
 				if(!(StdDraw.isKeyPressed(KeyEvent.VK_DOWN))){detectionToucheBas = false;}
 				if(!(StdDraw.isKeyPressed(KeyEvent.VK_UP))){detectionToucheHaut = false;}
@@ -82,7 +87,7 @@ public class Main {
 						player = 0;
 					}
 					// oxygene = oxygene + fact*Cout.cout(2, 0, pos);
-
+				
 				}
 				if (StdDraw.isKeyPressed(KeyEvent.VK_ENTER) && pos[player] != 0 && coffre[cave[3] + pos[player]] != 0 && !detectionToucheRecup) {
 					oxygene = Oxygene.oxygene(pos[player], 3, oxygene, playerCoffre[player], playerTresor[player],
@@ -103,6 +108,45 @@ public class Main {
 					// oxygene = oxygene + fact*Cout.cout(3, 0, pos);
 
 				}
+				if (player == 3)
+				{
+				
+					if (data[0] == 1) {ft = false;}
+					if (data[0] == 0) {ft = true;}
+					data = IA.ia(playerCoffre, cave, 3, cave[3], oxygene, coffre, Math.abs(pos[3]), targets, ft);
+					targets = data[1];
+					if(data[2] == 1 && pos[3] != -cave[3]) {
+						pos[3]--;
+						oxygene = Oxygene.oxygene(pos[3], 1, oxygene, playerCoffre[3], playerTresor[3],
+								tresorSvg[player])[0];
+						tresorSvg[3] = tresorSvg[3] + (int) Oxygene.oxygene(pos[3], 1, oxygene,
+								playerCoffre[3], playerTresor[3], tresorSvg[3])[1];
+						player = 0;
+						
+					}
+					if (data[2] == 2 && pos[3] != 0) {
+						pos[3]++;
+						oxygene = Oxygene.oxygene(pos[3], 2, oxygene, playerCoffre[3], playerTresor[3],
+								tresorSvg[3])[0];
+						tresorSvg[3] = tresorSvg[3] + (int) Oxygene.oxygene(pos[3], 2, oxygene,
+								playerCoffre[3], playerTresor[3], tresorSvg[3])[1];
+						player = 0;
+					}
+					if (data[2] == 3 && pos[player] != 0 && coffre[cave[3] + pos[player]] != 0 ) {
+						oxygene = Oxygene.oxygene(pos[player], 3, oxygene, playerCoffre[player], playerTresor[player],
+								tresorSvg[player])[0];
+						tresorSvg[player] = tresorSvg[player] + (int) Oxygene.oxygene(pos[player], 3, oxygene,
+								playerCoffre[player], playerTresor[player], tresorSvg[player])[1];
+						coffre[cave[3] + pos[player]] = coffre[cave[3] + pos[player]] - 1;
+						playerCoffre[player]++;
+						playerTresor[player] = playerTresor[player] + tresors[cave[3] + pos[player]];
+						player = 0;
+					}
+					System.out.println(data[0]);
+					System.out.println(data[1]);
+					System.out.println(Math.abs(pos[3]));
+					System.out.println(data[2]);
+				}
 				// System.out.println(oxygene);
 			}
 			while (!(StdDraw.isKeyPressed(KeyEvent.VK_RIGHT))) {
@@ -110,17 +154,6 @@ public class Main {
 				deathscreen.deathscreens();
 			}
 
-			/*
-			 * StdDraw.clear(StdDraw.RED); StdDraw.text(75, 50, "Vous êtes morts");
-			 * StdDraw.show();
-			 */
 		}
 	}
 }
-// InterfaceGraphique.IG();
-
-/*
- * int [] player = new int [4]; for(int i = 0; i<4; i++) { While (oxygene!=0){
- * 
- * System.out.println(Coffre.coffre(1,6,6));
- */

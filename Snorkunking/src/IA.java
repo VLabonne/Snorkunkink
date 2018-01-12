@@ -1,66 +1,60 @@
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class IA {
 
-		public static List<Object> ia(int realPlayer, int maxNiveau, int oxygene, int[] nbrcoffre, int niveauActuel, int[] targets, boolean[] focusTargets) {
+		public static int[] ia(int[] nbrcoffre, int[] cave, int realPlayer, int maxNiveau, double oxygene, int[] coffre, int niveauActuel, int targets, boolean focusTargets) {
 			
-			boolean[] focusTarget = new boolean[4];
-			List<Object> data = new ArrayList<Object>();
-			
-			for(int i = 0; i == 4 - realPlayer; i++) {
-				
-				int[] target = new int [4 - realPlayer];
-				focusTarget[i] = false;
 				int action = 0;
+				int ft = 0;
 			
-				while(true) {
-					if(focusTarget[i] == false) {
+					if(!focusTargets ) {
 						
 						Random rand = new Random();
-						target[i] = rand.nextInt(maxNiveau);
-						focusTarget[i] = true;
+						targets = rand.nextInt(maxNiveau);
+						focusTargets = true;
 					}
 					
-					if(focusTarget[i] && oxygene >( (target[i] - niveauActuel)*Cout.cout(1, nbrcoffre[i], niveauActuel) + target[i]*Cout.cout(1, nbrcoffre[i], niveauActuel) + (target[i] + 1)*Cout.cout(1, nbrcoffre[i+1], niveauActuel) + (target[i] + 1)*Cout.cout(1, nbrcoffre[i+2], niveauActuel) + (target[i] + 1)*Cout.cout(1, nbrcoffre[i+3], niveauActuel) )) {
+					if(focusTargets){ // && oxygene >( (targets - niveauActuel)*Cout.cout(1, nbrcoffre[3 - realPlayer], niveauActuel) + targets*Cout.cout(1, nbrcoffre[3 - realPlayer], niveauActuel) + (targets + 1)*Cout.cout(1, nbrcoffre[3 - realPlayer+1], niveauActuel) + (targets + 1)*Cout.cout(1, nbrcoffre[3 - realPlayer+2], niveauActuel) + (targets + 1)*Cout.cout(1, nbrcoffre[3 - realPlayer+3], niveauActuel))) {
 						
-						if(target[i] < niveauActuel) {
+						if(targets < niveauActuel) {
 							action = 2;
-							break;
+							
 						}
 						
-						if(target[i] > niveauActuel) {
+						if(targets > niveauActuel) {
 							action = 1;
-							break;
+							
 						}
 						
-						if(target[i] == niveauActuel) {
+						if(targets == niveauActuel && coffre[cave[3] - niveauActuel] != 0) {
 							action = 3;
-							break;
+							focusTargets = false;
+						
 						}
 					}
 					
 					else {
-						
-						if(nbrcoffre[i] != 0 && oxygene > niveauActuel*Cout.cout(1, nbrcoffre[i], niveauActuel)) {
-							target[i] = 0;
-							focusTarget[i] = true;
+						focusTargets = false;
+						/*if(nbrcoffre[3 - realPlayer] != 0 && oxygene > niveauActuel*Cout.cout(1, nbrcoffre[3 - realPlayer], niveauActuel)) {
+							targets = 0;
+							focusTargets = true;
 							action = 1;
-							break;
+							
 						}
 						
 						else {
 							
 							Suicide.suicide();
-						}
+						}*/
 					}
-				}
 				
-				data.add(action);
-				data.add(target);
-				data.add(focusTarget);
-			}
+				int[] data = new int[3];
+				if(focusTargets) {ft = 0;}
+				if(!(focusTargets)) {ft = 1;}
+				data[0] = ft;
+				data[1] = targets;
+				data[2] = action;
 			
 			return data;
 			
